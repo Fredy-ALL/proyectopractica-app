@@ -1,0 +1,33 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.MainPage"
+             Title="Usuarios">
+
+    <StackLayout Padding="20" Spacing="15">
+
+        <!-- Formulario para agregar usuario -->
+        <Label Text="Agregar Usuario" FontSize="24" HorizontalOptions="Center"/>
+
+        <Entry x:Name="EntryUsername" Placeholder="Usuario"/>
+        <Entry x:Name="EntryPassword" Placeholder="Contraseña" IsPassword="True"/>
+        <Entry x:Name="EntryEmail" Placeholder="Correo electrónico"/>
+
+        <Button Text="Agregar Usuario" Clicked="OnAgregarUsuarioClicked"/>
+
+        <Label Text="Lista de Usuarios" FontSize="24" HorizontalOptions="Center" Margin="20,10,0,0"/>
+
+        <!-- Lista de usuarios -->
+        <CollectionView x:Name="UsuariosCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="5">
+                        <Label Text="{Binding Username}" FontAttributes="Bold"/>
+                        <Label Text="{Binding Email}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Cargar Usuarios" Clicked="OnCargarUsuariosClicked"/>
+    </StackLayout>
+</ContentPage>
