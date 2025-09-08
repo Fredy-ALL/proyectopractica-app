@@ -3,31 +3,50 @@
              x:Class="ToDoApp.MainPage"
              Title="Usuarios">
 
-    <StackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
 
-        <!-- Formulario para agregar usuario -->
-        <Label Text="Agregar Usuario" FontSize="24" HorizontalOptions="Center"/>
+            <!-- Formulario para agregar usuario -->
+            <Label Text="Registro de Usuario" 
+                   FontSize="24" 
+                   HorizontalOptions="Center"/>
 
-        <Entry x:Name="EntryUsername" Placeholder="Usuario"/>
-        <Entry x:Name="EntryPassword" Placeholder="Contraseña" IsPassword="True"/>
-        <Entry x:Name="EntryEmail" Placeholder="Correo electrónico"/>
+            <Entry x:Name="EntryNombre" Placeholder="Nombres"/>
+            <Entry x:Name="EntryApellido" Placeholder="Apellidos"/>
+            <Entry x:Name="EntryUsername" Placeholder="Nombre de usuario"/>
+            <Entry x:Name="EntryPassword" Placeholder="Contraseña" IsPassword="True"/>
+            <Entry x:Name="EntryEmail" Placeholder="Correo electrónico"/>
 
-        <Button Text="Agregar Usuario" Clicked="OnAgregarUsuarioClicked"/>
+            <Button Text="Agregar Usuario" 
+                    Clicked="OnAgregarUsuarioClicked"
+                    BackgroundColor="#007ACC" 
+                    TextColor="White"/>
 
-        <Label Text="Lista de Usuarios" FontSize="24" HorizontalOptions="Center" Margin="20,10,0,0"/>
+            <Label Text="Lista de Usuarios" 
+                   FontSize="24" 
+                   HorizontalOptions="Center" 
+                   Margin="20,10,0,0"/>
 
-        <!-- Lista de usuarios -->
-        <CollectionView x:Name="UsuariosCollectionView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="5">
-                        <Label Text="{Binding Username}" FontAttributes="Bold"/>
-                        <Label Text="{Binding Email}"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- Lista de usuarios -->
+            <CollectionView x:Name="UsuariosCollectionView" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" Margin="5" Padding="10" CornerRadius="10">
+                            <StackLayout>
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Apellido}" />
+                                <Label Text="{Binding Username}" FontSize="12"/>
+                                <Label Text="{Binding Email}" FontSize="12" TextColor="Gray"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Button Text="Cargar Usuarios" Clicked="OnCargarUsuariosClicked"/>
-    </StackLayout>
+            <Button Text="Cargar Usuarios" 
+                    Clicked="OnCargarUsuariosClicked"
+                    BackgroundColor="Green" 
+                    TextColor="White"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

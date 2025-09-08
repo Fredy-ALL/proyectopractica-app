@@ -11,7 +11,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         _client = new HttpClient
         {
-            BaseAddress = new Uri("http://192.168.40.3:5000/api/") // Cambia a tu API
+            BaseAddress = new Uri("http://192.168.40.3:5000/api/") // 🔹 Cambia a la URL de tu API real
         };
     }
 
@@ -32,8 +32,11 @@ public partial class MainPage : ContentPage
     // Agregar nuevo usuario
     private async void OnAgregarUsuarioClicked(object sender, EventArgs e)
     {
+        // 🔹 Crear objeto con los datos del formulario
         var nuevoUsuario = new Usuario
         {
+            Nombre = EntryNombre.Text,
+            Apellido = EntryApellido.Text,
             Username = EntryUsername.Text,
             Password = EntryPassword.Text,
             Email = EntryEmail.Text
@@ -45,12 +48,20 @@ public partial class MainPage : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 await DisplayAlert("Éxito", "Usuario agregado correctamente", "OK");
-                EntryUsername.Text = EntryPassword.Text = EntryEmail.Text = ""; // Limpiar formulario
-                OnCargarUsuariosClicked(null, null); // Refrescar lista
+
+                // 🔹 Limpiar formulario
+                EntryNombre.Text = "";
+                EntryApellido.Text = "";
+                EntryUsername.Text = "";
+                EntryPassword.Text = "";
+                EntryEmail.Text = "";
+
+                // 🔹 Refrescar lista
+                OnCargarUsuariosClicked(null, null);
             }
             else
             {
-                await DisplayAlert("Error", "No se pudo agregar el usuario", "OK");
+                await DisplayAlert("Error", $"No se pudo agregar el usuario ({response.StatusCode})", "OK");
             }
         }
         catch (Exception ex)
@@ -60,10 +71,12 @@ public partial class MainPage : ContentPage
     }
 }
 
-// Modelo de Usuario (puede ir en otro archivo)
+// Modelo de Usuario (puede ir en otra carpeta/archivo)
 public class Usuario
 {
     public int Id { get; set; }
+    public string Nombre { get; set; } = "";
+    public string Apellido { get; set; } = "";
     public string Username { get; set; } = "";
     public string Password { get; set; } = "";
     public string Email { get; set; } = "";
